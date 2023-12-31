@@ -1,10 +1,9 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:km_book_crud/app/core/theme/app_colors.dart';
 import 'package:km_book_crud/app/modules/auth/login/login_controller.dart';
-import 'package:km_book_crud/app/routes/home_routes.dart';
+import 'package:km_book_crud/app/routes/auth_routes.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
@@ -14,64 +13,74 @@ class LoginPage extends GetView<LoginController> {
     return Scaffold(
       backgroundColor: AppColor.color3,
       body: Obx(() {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            const Expanded(
-              child: Icon(
-                Icons.supervised_user_circle,
-                size: 200.0,
-                color: AppColor.color2,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              height: Get.height / 2,
-              decoration: const BoxDecoration(
-                color: AppColor.color2,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(32),
-                    topRight: Radius.circular(32)),
-              ),
-              child: Form(
-                key: controller.formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _emailForm(),
-                    const SizedBox(
-                      height: 10.0,
-                    ),
-                    _passwordForm(),
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    _loginButton(),
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        shape: BeveledRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      onPressed: () {
-                        Get.toNamed(HomeRoutes.home);
-                      },
-                      child: const Text(
-                        "DEV",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
+        return SingleChildScrollView(
+          child: SizedBox(
+            width: Get.width,
+            height: Get.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Expanded(
+                  child: Icon(
+                    Icons.supervised_user_circle,
+                    size: 200.0,
+                    color: AppColor.color2,
+                  ),
                 ),
-              ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  height: Get.height / 2,
+                  decoration: const BoxDecoration(
+                    color: AppColor.color2,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(32),
+                        topRight: Radius.circular(32)),
+                  ),
+                  child: Form(
+                    key: controller.formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _emailForm(),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        _passwordForm(),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        _loginButton(),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const Text(
+                              "Belum memiliki akun ? ",
+                              style: TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.toNamed(AuthRoutes.registration);
+                              },
+                              child: const Text(
+                                "Daftar",
+                                style: TextStyle(
+                                  color: Colors.amber,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         );
       }),
     );
@@ -100,7 +109,7 @@ class LoginPage extends GetView<LoginController> {
         prefixIcon: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 10),
           child: Icon(
-            Icons.person,
+            Icons.email,
           ),
         ),
       ),

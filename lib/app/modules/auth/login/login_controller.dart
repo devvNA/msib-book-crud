@@ -5,7 +5,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:km_book_crud/app/core/theme/app_colors.dart';
 import 'package:km_book_crud/app/data/repositories/auth_repository.dart';
 import '../../../routes/home_routes.dart';
 
@@ -54,9 +53,8 @@ class LoginController extends GetxController {
     isTap.value = false;
 
     if (!isSuccess) {
-      Get.snackbar("invalid", "Wrong email or password",
-          backgroundColor: AppColor.color4);
-      return;
+      return Get.snackbar("invalid", "Wrong email or password",
+          colorText: Colors.white, backgroundColor: Colors.red[600]);
     }
     Get.offAllNamed(HomeRoutes.home);
   }

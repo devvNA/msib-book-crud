@@ -9,12 +9,14 @@ class BookItem extends StatelessWidget {
     Key? key,
     required this.onTap,
     required this.onEdit,
+    required this.onDelete,
     required this.size,
     required this.book,
   }) : super(key: key);
 
   final VoidCallback onTap;
   final VoidCallback onEdit;
+  final VoidCallback onDelete;
   final double size;
   final Book book;
 
@@ -57,8 +59,23 @@ class BookItem extends StatelessWidget {
                 backgroundColor: Theme.of(context).cardColor.withOpacity(0.6),
                 child: const Icon(
                   Icons.edit,
-                  size: 14.0,
-                  color: AppColor.color3,
+                  size: 18.0,
+                  color: Colors.green,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 50,
+            right: 0,
+            child: IconButton(
+              onPressed: onDelete,
+              icon: CircleAvatar(
+                backgroundColor: Theme.of(context).cardColor.withOpacity(0.6),
+                child: const Icon(
+                  Icons.delete_forever,
+                  size: 18.0,
+                  color: AppColor.error,
                 ),
               ),
             ),
@@ -66,34 +83,40 @@ class BookItem extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  color: Colors.black54,
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        book.title!,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+              Material(
+                type: MaterialType.transparency,
+                child: InkWell(
+                  onTap: onTap,
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      padding: const EdgeInsets.all(10.0),
+                      color: Colors.black54,
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            book.title!,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5.0,
+                          ),
+                          Text(
+                            "by: ${book.author}",
+                            style: const TextStyle(
+                              color: AppColor.color2,
+                              fontSize: 10.0,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        "by: ${book.author}",
-                        style: const TextStyle(
-                          color: AppColor.color2,
-                          fontSize: 10.0,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),

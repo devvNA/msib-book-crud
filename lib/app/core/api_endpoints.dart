@@ -6,5 +6,5 @@ const bookUrl = '/api/books';
 //Auth
 const registerUrl = '/api/register';
 const loginUrl = '/api/login';
-const user = '/api/user';
-const logoutUrl = '/api/logout';
+const userUrl = '/api/user';
+const logoutUrl = '/api/user/logout';

@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../modules/book_form/book_form_binding.dart';
 import '../modules/book_form/book_form_page.dart';
 

@@ -1,37 +1,66 @@
-// ignore_for_file: unnecessary_overrides
+// ignore_for_file: unnecessary_overrides, unnecessary_null_comparison
 
 import 'package:get/get.dart';
 import 'package:km_book_crud/app/data/repositories/book_repository.dart';
+import 'package:km_book_crud/app/modules/home/home_controller.dart';
+
+import '../../data/models/book_model.dart';
 
 class BookFormController extends GetxController {
-  int? userId;
+  Book? book = Get.arguments;
+
   String? isbn;
   String? title;
   String? subtitle;
   String? author;
-  DateTime? published;
   String? publisher;
   int? pages;
   String? description;
   String? website;
 
+  bool get isEditMode => book != null;
+
   @override
   void onInit() {
+    if (isEditMode) {
+      isbn = book!.isbn;
+      title = book!.title;
+      subtitle = book!.subtitle;
+      author = book!.author;
+      publisher = book!.publisher;
+      pages = book!.pages;
+      description = book!.description;
+      website = book!.website;
+    }
     super.onInit();
   }
 
-  addBook() async {
-    await BookRepository().createBook(
-        userId: userId!,
+  saveBook() async {
+    if (isEditMode) {
+      await BookRepository().updateBook(
+        id: book!.id!,
         isbn: isbn!,
         title: title!,
         subtitle: subtitle!,
         author: author!,
-        published: published!,
         publisher: publisher!,
         pages: pages!,
         description: description!,
-        website: website!);
+        website: website!,
+      );
+    } else {
+      await BookRepository().createBook(
+          isbn: isbn!,
+          title: title!,
+          subtitle: subtitle!,
+          author: author!,
+          publisher: publisher!,
+          pages: pages!,
+          description: description!,
+          website: website!);
+    }
+    Get.find<HomeController>().onRefresh();
+    Get.back();
   }
 
   @override

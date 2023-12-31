@@ -27,12 +27,10 @@ class BookRepository {
   }
 
   Future<void> createBook({
-    required int userId,
     required String isbn,
     required String title,
     required String subtitle,
     required String author,
-    required DateTime published,
     required String publisher,
     required int pages,
     required String description,
@@ -47,7 +45,7 @@ class BookRepository {
         "title": title,
         "subtitle": subtitle,
         "author": author,
-        "published": published,
+        "published": DateTime.now().toString(),
         "publisher": publisher,
         "pages": pages,
         "description": description,
@@ -62,12 +60,10 @@ class BookRepository {
 
   Future<void> updateBook({
     required int id,
-    required int userId,
     required String isbn,
     required String title,
     required String subtitle,
     required String author,
-    required DateTime published,
     required String publisher,
     required int pages,
     required String description,
@@ -76,13 +72,12 @@ class BookRepository {
     try {
       final request = Request();
 
-      var response =
-          request.put("$bookUrl/$id/edit", requiresAuthToken: true, body: {
+      await request.put("$bookUrl/$id/edit", requiresAuthToken: true, body: {
         "isbn": isbn,
         "title": title,
         "subtitle": subtitle,
         "author": author,
-        "published": published,
+        "published": DateTime.now().toString(),
         "publisher": publisher,
         "pages": pages,
         "description": description,
@@ -93,13 +88,12 @@ class BookRepository {
     }
   }
 
-  // Future<List<Book>> deleteBook(params) async {
-  //   try {
-  //     final request = Request();
-
-  //     var response = request.delete(listBooks, requiresAuthToken: true);
-  //   } on DioException catch (_) {
-  //     rethrow;
-  //   }
-  // }
+  Future<void> deleteBook(int id) async {
+    try {
+      final request = Request();
+      await request.delete("$bookUrl/$id", requiresAuthToken: true);
+    } on DioException catch (_) {
+      rethrow;
+    }
+  }
 }

@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:km_book_crud/app/data/repositories/auth_repository.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../core/api_endpoints.dart';
