@@ -1,19 +1,5 @@
 class Book {
-  final int? id;
-  final int? userId;
-  final String? isbn;
-  final String? title;
-  final String? subtitle;
-  final String? author;
-  final DateTime? published;
-  final String? publisher;
-  final int? pages;
-  final String? description;
-  final String? website;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-
-  Book({
+  const Book({
     this.id,
     this.userId,
     this.isbn,
@@ -28,6 +14,20 @@ class Book {
     this.createdAt,
     this.updatedAt,
   });
+
+  final int? id;
+  final int? userId;
+  final String? isbn;
+  final String? title;
+  final String? subtitle;
+  final String? author;
+  final DateTime? published;
+  final String? publisher;
+  final int? pages;
+  final String? description;
+  final String? website;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   factory Book.fromJson(Map<String, dynamic> json) => Book(
         id: json["id"],

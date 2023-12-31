@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:km_book_crud/app/data/repositories/auth_repository.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../core/api_endpoints.dart';
@@ -33,16 +34,20 @@ class Request {
     ));
   }
 
+  Future<void> _getToken() async {
+    var getToken = await box.read("token");
+    updateAuthorization(getToken);
+  }
+
   /// Fungsi ini digunakan untuk memperbarui header authorization
   void updateAuthorization(String token) {
-    token = box.read("accessToken") ?? "null";
     _dio.options.headers['Authorization'] = 'Bearer $token';
   }
 
   /// GET request
   Future<Response> get(String endpoint,
       {JSON? queryParameters, bool requiresAuthToken = true}) async {
-    if (requiresAuthToken) await _setToken();
+    if (requiresAuthToken) await _getToken();
     return await _dio.get(endpoint, queryParameters: queryParameters);
   }
 
@@ -51,7 +56,7 @@ class Request {
       {Object? body,
       JSON? queryParameters,
       required bool requiresAuthToken}) async {
-    if (requiresAuthToken) await _setToken();
+    if (requiresAuthToken) await _getToken();
     return await _dio.post(endpoint,
         queryParameters: queryParameters, data: body);
   }
@@ -59,7 +64,7 @@ class Request {
   /// DELETE request
   Future<Response> delete(String endpoint,
       {Object? body, required bool requiresAuthToken}) async {
-    if (requiresAuthToken) await _setToken();
+    if (requiresAuthToken) await _getToken();
     return await _dio.delete(endpoint, data: body);
   }
 
@@ -68,10 +73,8 @@ class Request {
       {Object? body,
       JSON? queryParameters,
       required bool requiresAuthToken}) async {
-    if (requiresAuthToken) await _setToken();
+    if (requiresAuthToken) await _getToken();
     return await _dio.put(endpoint,
         data: body, queryParameters: queryParameters);
   }
-
-  Future<void> _setToken() async {}
 }

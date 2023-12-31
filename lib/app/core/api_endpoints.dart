@@ -1,9 +1,7 @@
-const baseUrl = 'https://book-crud-service-6dmqxfovfq-et.a.run.app/api/books';
+const baseUrl = 'https://book-crud-service-6dmqxfovfq-et.a.run.app';
 
 //Books
-const listBooks = '/api/books';
-const addBook = '/api/books/add';
-const detailProduct = "/getallproduk";
+const bookUrl = '/api/books';
 
 //Auth
 const registerUrl = '/api/register';

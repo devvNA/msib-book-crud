@@ -1,9 +1,7 @@
-// ignore_for_file: unnecessary_overrides
-
 import 'package:get/get.dart';
 
-class ProfileController extends GetxController {
-
+class RegistrationController extends GetxController {
+  //TODO: Implement RegistrationController.
 
   @override
   void onInit() {

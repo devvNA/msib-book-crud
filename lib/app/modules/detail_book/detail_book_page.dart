@@ -13,10 +13,10 @@ class DetailBookPage extends GetView<DetailBookController> {
         title: const Text('DetailBookPage'),
         centerTitle: true,
       ),
-      body: const Center(
+      body: Center(
         child: Text(
-          'DetailBookPage is working',
-          style: TextStyle(fontSize: 20),
+          controller.book.title!,
+          style: const TextStyle(fontSize: 20),
         ),
       ),
     );
