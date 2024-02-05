@@ -23,9 +23,10 @@ class AuthRepository {
           "password": password,
         },
       );
+      Map obj = response.data;
 
       if (response.statusCode == 200) {
-        box.write("token", response.data["token"]);
+        box.write("token", obj["token"]);
         log("Token : ${box.read("token")}");
         return true;
       }

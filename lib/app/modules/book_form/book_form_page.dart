@@ -46,11 +46,13 @@ class BookFormPage extends GetView<BookFormController> {
           padding: EdgeInsets.all(20.0),
           children: [
             BookForm(
-                title: "ISBN",
-                value: controller.isbn,
-                onChanged: (value) {
-                  controller.isbn = value;
-                }),
+              title: "ISBN",
+              isEnabled: false,
+              value: controller.isbn,
+              onChanged: (value) {
+                controller.isbn = value;
+              },
+            ),
             space,
             BookForm(
               title: "Title",

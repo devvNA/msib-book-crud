@@ -8,16 +8,19 @@ class BookForm extends StatelessWidget {
     Key? key,
     this.value,
     required this.title,
+    this.isEnabled,
     this.onChanged,
   }) : super(key: key);
 
   final String? value;
   final String title;
+  final bool? isEnabled;
   final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: isEnabled,
       initialValue: value,
       decoration: InputDecoration(
         labelText: title,

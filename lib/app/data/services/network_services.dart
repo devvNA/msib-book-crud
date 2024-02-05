@@ -19,9 +19,9 @@ class Request {
         persistentConnection: true,
         receiveDataWhenStatusError: true,
         baseUrl: baseUrl,
-        connectTimeout: const Duration(seconds: 60),
-        receiveTimeout: const Duration(seconds: 60),
-        sendTimeout: const Duration(seconds: 60),
+        connectTimeout: const Duration(seconds: 15),
+        receiveTimeout: const Duration(seconds: 15),
+        sendTimeout: const Duration(seconds: 15),
         contentType: "application/json",
         responseType: ResponseType.json));
 

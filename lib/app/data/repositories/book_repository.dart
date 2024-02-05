@@ -39,18 +39,21 @@ class BookRepository {
     try {
       final request = Request();
 
-      var response =
-          await request.post("$bookUrl/add", requiresAuthToken: true, body: {
-        "isbn": isbn,
-        "title": title,
-        "subtitle": subtitle,
-        "author": author,
-        "published": DateTime.now().toString(),
-        "publisher": publisher,
-        "pages": pages,
-        "description": description,
-        "website": website
-      });
+      var response = await request.post(
+        "$bookUrl/add",
+        requiresAuthToken: true,
+        body: {
+          "isbn": isbn,
+          "title": title,
+          "subtitle": subtitle,
+          "author": author,
+          "published": DateTime.now().toString(),
+          "publisher": publisher,
+          "pages": pages,
+          "description": description,
+          "website": website
+        },
+      );
       Map obj = response.data;
       return obj["book"]["id"];
     } on DioException catch (_) {
